@@ -1,0 +1,332 @@
+@prefix : <http://ti.rw.fau.de/sim#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix fn: <http://www.w3.org/2005/xpath-functions#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix sesame: <http://www.openrdf.org/schema/sesame#> .
+@prefix time: <http://www.w3.org/2006/time#> .
+@prefix rdf4j: <http://rdf4j.org/schema/rdf4j#> .
+
+<http://127.0.1.1:8080/sim> {
+  <http://127.0.1.1:8080/sim> :initialTime "2020-05-21T08:00:00Z"^^xsd:dateTime;
+    :timeslotDuration 100;
+    :iterations 500;
+    :seed 1234;
+    :currentIteration 0;
+    :currentTime _:node1f7nv8avax1 .
+  
+  _:node1f7nv8avax1 time:inXSDDateTimeStamp "2020-05-21T08:00:00Z"^^xsd:dateTime;
+    time:inDateTime _:node1f7nv8avax2 .
+  
+  _:node1f7nv8avax2 time:year 2020;
+    time:month 5;
+    time:day 21;
+    time:hour 8;
+    time:minute 0;
+    time:second 0.0 .
+}
+
+<http://127.0.1.1:8080/> {
+  <http://127.0.1.1:8080/> a <http://www.w3.org/ns/ldp#BasicContainer>;
+    <http://www.w3.org/ns/ldp#contains> <http://127.0.1.1:8080/recipes>, <http://127.0.1.1:8080/stations>,
+      <http://127.0.1.1:8080/transporters>, <http://127.0.1.1:8080/shopfloor> .
+}
+
+<http://127.0.1.1:8080/recipes> {
+  <http://127.0.1.1:8080/recipes> a <http://www.w3.org/ns/ldp#BasicContainer>;
+    <http://www.w3.org/ns/ldp#contains> <http://127.0.1.1:8080/recipes/mainboardRecipe>,
+      <http://127.0.1.1:8080/recipes/cpuRecipe>, <http://127.0.1.1:8080/recipes/ramRecipe>,
+      <http://127.0.1.1:8080/recipes/flashMemoryRecipe>, <http://127.0.1.1:8080/recipes/mainModuleRecipe> .
+}
+
+<http://127.0.1.1:8080/recipes/mainboardRecipe> {
+  <http://127.0.1.1:8080/recipes/mainboardRecipe> a <http://arena2036.example.org/Recipe>;
+    <http://arena2036.example.org/requiresSkill> <http://arena2036.example.org/boardStorage>;
+    <http://arena2036.example.org/requiresProducts> <http://arena2036.example.org/none>;
+    <http://arena2036.example.org/yieldsProducts> <http://arena2036.example.org/mainboard>;
+    <http://arena2036.example.org/baseProcessingTime> 4;
+    <http://arena2036.example.org/processingTimeVariance> 1 .
+}
+
+<http://127.0.1.1:8080/recipes/cpuRecipe> {
+  <http://127.0.1.1:8080/recipes/cpuRecipe> a <http://arena2036.example.org/Recipe>;
+    <http://arena2036.example.org/requiresSkill> <http://arena2036.example.org/cpuStorage>;
+    <http://arena2036.example.org/requiresProducts> <http://arena2036.example.org/none>;
+    <http://arena2036.example.org/yieldsProducts> <http://arena2036.example.org/cpu>;
+    <http://arena2036.example.org/baseProcessingTime> 5;
+    <http://arena2036.example.org/processingTimeVariance> 1 .
+}
+
+<http://127.0.1.1:8080/recipes/ramRecipe> {
+  <http://127.0.1.1:8080/recipes/ramRecipe> a <http://arena2036.example.org/Recipe>;
+    <http://arena2036.example.org/requiresSkill> <http://arena2036.example.org/memoryStorage>;
+    <http://arena2036.example.org/requiresProducts> <http://arena2036.example.org/none>;
+    <http://arena2036.example.org/yieldsProducts> <http://arena2036.example.org/ram>;
+    <http://arena2036.example.org/baseProcessingTime> 3;
+    <http://arena2036.example.org/processingTimeVariance> 1 .
+}
+
+<http://127.0.1.1:8080/stations> {
+  <http://127.0.1.1:8080/stations> a <http://www.w3.org/ns/ldp#BasicContainer>;
+    <http://www.w3.org/ns/ldp#contains> <http://127.0.1.1:8080/stations/solderingStation1>,
+      <http://127.0.1.1:8080/stations/memoryStorageStation1>, <http://127.0.1.1:8080/stations/cpuStorageStation1>,
+      <http://127.0.1.1:8080/stations/boardStorageStation1> .
+}
+
+<http://127.0.1.1:8080/transporters> {
+  <http://127.0.1.1:8080/transporters> a <http://www.w3.org/ns/ldp#BasicContainer>;
+    <http://www.w3.org/ns/ldp#contains> <http://127.0.1.1:8080/transporters/fastTransporter1> .
+}
+
+<http://127.0.1.1:8080/recipes/flashMemoryRecipe> {
+  <http://127.0.1.1:8080/recipes/flashMemoryRecipe> a <http://arena2036.example.org/Recipe>;
+    <http://arena2036.example.org/requiresSkill> <http://arena2036.example.org/memoryStorage>;
+    <http://arena2036.example.org/requiresProducts> <http://arena2036.example.org/none>;
+    <http://arena2036.example.org/yieldsProducts> <http://arena2036.example.org/flashMemory>;
+    <http://arena2036.example.org/baseProcessingTime> 4;
+    <http://arena2036.example.org/processingTimeVariance> 1;
+    <http://arena2036.example.org/inputProcessingTime> 0 .
+}
+
+<http://127.0.1.1:8080/recipes/mainModuleRecipe> {
+  <http://127.0.1.1:8080/recipes/mainModuleRecipe> a <http://arena2036.example.org/Recipe>;
+    <http://arena2036.example.org/requiresSkill> <http://arena2036.example.org/soldering>;
+    <http://arena2036.example.org/requiresProducts> <http://arena2036.example.org/mainboard>,
+      <http://arena2036.example.org/cpu>, <http://arena2036.example.org/ram>, <http://arena2036.example.org/flashMemory>;
+    <http://arena2036.example.org/yieldsProducts> <http://arena2036.example.org/mainModule>;
+    <http://arena2036.example.org/baseProcessingTime> 6;
+    <http://arena2036.example.org/processingTimeVariance> 2;
+    <http://arena2036.example.org/inputProcessingTime> 1 .
+}
+
+<http://127.0.1.1:8080/shopfloor> {
+  <http://127.0.1.1:8080/shopfloor> a <http://arena2036.example.org/Shopfloor>;
+    <http://arena2036.example.org/sizeX> 15;
+    <http://arena2036.example.org/sizeY> 15 .
+}
+
+<http://127.0.1.1:8080/stations/solderingStation1> {
+  <http://127.0.1.1:8080/stations/solderingStation1> a <http://www.w3.org/ns/ldp#BasicContainer>,
+      <http://arena2036.example.org/Workstation>;
+    <http://www.w3.org/ns/ldp#contains> <http://127.0.1.1:8080/stations/solderingStation1/properties>,
+      <http://127.0.1.1:8080/stations/solderingStation1/tasks>, <http://127.0.1.1:8080/stations/solderingStation1/affordances>;
+    <http://arena2036.example.org/locationX1> 9;
+    <http://arena2036.example.org/locationY1> 7;
+    <http://arena2036.example.org/locationX2> 12;
+    <http://arena2036.example.org/locationY2> 8;
+    <http://arena2036.example.org/skills> <http://arena2036.example.org/soldering>;
+    <http://arena2036.example.org/status> <http://arena2036.example.org/idle>;
+    <http://arena2036.example.org/inputPort> _:genid-05e8f0b3f193422ab8deacd5530e32bb-soldering1input;
+    <http://arena2036.example.org/outputPort> _:genid-05e8f0b3f193422ab8deacd5530e32bb-soldering1output;
+    <http://arena2036.example.org/recipe> <http://127.0.1.1:8080/recipes/mainModuleRecipe> .
+  
+  _:genid-05e8f0b3f193422ab8deacd5530e32bb-soldering1input a <http://arena2036.example.org/Port>;
+    <http://arena2036.example.org/locationX> 8;
+    <http://arena2036.example.org/locationY> 7;
+    <http://arena2036.example.org/capacity> 5 .
+  
+  _:genid-05e8f0b3f193422ab8deacd5530e32bb-soldering1output a <http://arena2036.example.org/Port>;
+    <http://arena2036.example.org/locationX> 13;
+    <http://arena2036.example.org/locationY> 8;
+    <http://arena2036.example.org/capacity> 2 .
+}
+
+<http://127.0.1.1:8080/stations/solderingStation1/properties> {
+  <http://127.0.1.1:8080/stations/solderingStation1/properties> a <http://www.w3.org/ns/ldp#IndirectContainer>,
+      <http://arena2036.example.org/PropertyContainer>;
+    <http://www.w3.org/ns/ldp#contains> <http://127.0.1.1:8080/stations/solderingStation1/properties/recipe>;
+    <http://www.w3.org/ns/ldp#membershipResource> <http://127.0.1.1:8080/stations/solderingStation1>;
+    <http://www.w3.org/ns/ldp#hasMemberRelation> <http://arena2036.example.org/recipe>;
+    <http://www.w3.org/ns/ldp#insertedContentRelation> rdf:value .
+}
+
+<http://127.0.1.1:8080/stations/solderingStation1/properties/recipe> {
+  <http://127.0.1.1:8080/stations/solderingStation1/properties/recipe> rdf:value <http://127.0.1.1:8080/recipes/mainModuleRecipe> .
+}
+
+<http://127.0.1.1:8080/stations/solderingStation1/tasks> {
+  <http://127.0.1.1:8080/stations/solderingStation1/tasks> a <http://www.w3.org/ns/ldp#OrderedContainer>,
+      <http://arena2036.example.org/TaskContainer>;
+    <http://www.w3.org/ns/ldp#membershipResource> <http://127.0.1.1:8080/stations/solderingStation1>;
+    <http://www.w3.org/ns/ldp#hasMemberRelation> <http://arena2036.example.org/activeTask>;
+    <http://www.w3.org/ns/ldp#orderContentRelation> <http://arena2036.example.org/queuePosition> .
+}
+
+<http://127.0.1.1:8080/stations/solderingStation1/affordances> {
+  <http://127.0.1.1:8080/stations/solderingStation1/affordances> a <http://www.w3.org/ns/ldp#DirectContainer>,
+      <http://arena2036.example.org/AffordanceContainer>;
+    <http://www.w3.org/ns/ldp#membershipResource> <http://127.0.1.1:8080/stations/solderingStation1>;
+    <http://www.w3.org/ns/ldp#hasMemberRelation> <http://arena2036.example.org/affords> .
+}
+
+<http://127.0.1.1:8080/stations/memoryStorageStation1> {
+  <http://127.0.1.1:8080/stations/memoryStorageStation1> a <http://arena2036.example.org/Workstation>;
+    <http://www.w3.org/ns/ldp#contains> <http://127.0.1.1:8080/stations/memoryStorageStation1/properties>,
+      <http://127.0.1.1:8080/stations/memoryStorageStation1/tasks>, <http://127.0.1.1:8080/stations/memoryStorageStation1/affordances>;
+    <http://arena2036.example.org/locationX1> 0;
+    <http://arena2036.example.org/locationY1> 0;
+    <http://arena2036.example.org/locationX2> 1;
+    <http://arena2036.example.org/locationY2> 1;
+    <http://arena2036.example.org/skills> <http://arena2036.example.org/memoryStorage>;
+    <http://arena2036.example.org/status> <http://arena2036.example.org/idle>;
+    <http://arena2036.example.org/outputPort> _:genid-05e8f0b3f193422ab8deacd5530e32bb-memoryStorage1output;
+    <http://arena2036.example.org/recipe> <http://127.0.1.1:8080/recipes/ramRecipe> .
+  
+  _:genid-05e8f0b3f193422ab8deacd5530e32bb-memoryStorage1output a <http://arena2036.example.org/Port>;
+    <http://arena2036.example.org/locationX> 2;
+    <http://arena2036.example.org/locationY> 1;
+    <http://arena2036.example.org/capacity> 2 .
+}
+
+<http://127.0.1.1:8080/stations/memoryStorageStation1/properties> {
+  <http://127.0.1.1:8080/stations/memoryStorageStation1/properties> a <http://www.w3.org/ns/ldp#IndirectContainer>,
+      <http://arena2036.example.org/PropertyContainer>;
+    <http://www.w3.org/ns/ldp#contains> <http://127.0.1.1:8080/stations/memoryStorageStation1/properties/recipe>;
+    <http://www.w3.org/ns/ldp#membershipResource> <http://127.0.1.1:8080/stations/memoryStorageStation1>;
+    <http://www.w3.org/ns/ldp#hasMemberRelation> <http://arena2036.example.org/recipe>;
+    <http://www.w3.org/ns/ldp#insertedContentRelation> rdf:value .
+}
+
+<http://127.0.1.1:8080/stations/memoryStorageStation1/properties/recipe> {
+  <http://127.0.1.1:8080/stations/memoryStorageStation1/properties/recipe> rdf:value
+      <http://127.0.1.1:8080/recipes/ramRecipe> .
+}
+
+<http://127.0.1.1:8080/stations/memoryStorageStation1/tasks> {
+  <http://127.0.1.1:8080/stations/memoryStorageStation1/tasks> a <http://www.w3.org/ns/ldp#OrderedContainer>,
+      <http://arena2036.example.org/TaskContainer>;
+    <http://www.w3.org/ns/ldp#membershipResource> <http://127.0.1.1:8080/stations/memoryStorageStation1>;
+    <http://www.w3.org/ns/ldp#hasMemberRelation> <http://arena2036.example.org/activeTask>;
+    <http://www.w3.org/ns/ldp#orderContentRelation> <http://arena2036.example.org/queuePosition> .
+}
+
+<http://127.0.1.1:8080/stations/memoryStorageStation1/affordances> {
+  <http://127.0.1.1:8080/stations/memoryStorageStation1/affordances> a <http://www.w3.org/ns/ldp#DirectContainer>,
+      <http://arena2036.example.org/AffordanceContainer>;
+    <http://www.w3.org/ns/ldp#membershipResource> <http://127.0.1.1:8080/stations/memoryStorageStation1>;
+    <http://www.w3.org/ns/ldp#hasMemberRelation> <http://arena2036.example.org/affords> .
+}
+
+<http://127.0.1.1:8080/stations/cpuStorageStation1> {
+  <http://127.0.1.1:8080/stations/cpuStorageStation1> a <http://arena2036.example.org/Workstation>;
+    <http://www.w3.org/ns/ldp#contains> <http://127.0.1.1:8080/stations/cpuStorageStation1/properties>,
+      <http://127.0.1.1:8080/stations/cpuStorageStation1/tasks>, <http://127.0.1.1:8080/stations/cpuStorageStation1/affordances>;
+    <http://arena2036.example.org/locationX1> 0;
+    <http://arena2036.example.org/locationY1> 5;
+    <http://arena2036.example.org/locationX2> 1;
+    <http://arena2036.example.org/locationY2> 6;
+    <http://arena2036.example.org/skills> <http://arena2036.example.org/cpuStorage>;
+    <http://arena2036.example.org/status> <http://arena2036.example.org/idle>;
+    <http://arena2036.example.org/outputPort> _:genid-05e8f0b3f193422ab8deacd5530e32bb-cpuStorage1output;
+    <http://arena2036.example.org/recipe> <http://127.0.1.1:8080/recipes/cpuRecipe> .
+  
+  _:genid-05e8f0b3f193422ab8deacd5530e32bb-cpuStorage1output a <http://arena2036.example.org/Port>;
+    <http://arena2036.example.org/locationX> 2;
+    <http://arena2036.example.org/locationY> 6;
+    <http://arena2036.example.org/capacity> 2 .
+}
+
+<http://127.0.1.1:8080/stations/cpuStorageStation1/properties> {
+  <http://127.0.1.1:8080/stations/cpuStorageStation1/properties> a <http://www.w3.org/ns/ldp#IndirectContainer>,
+      <http://arena2036.example.org/PropertyContainer>;
+    <http://www.w3.org/ns/ldp#contains> <http://127.0.1.1:8080/stations/cpuStorageStation1/properties/recipe>;
+    <http://www.w3.org/ns/ldp#membershipResource> <http://127.0.1.1:8080/stations/cpuStorageStation1>;
+    <http://www.w3.org/ns/ldp#hasMemberRelation> <http://arena2036.example.org/recipe>;
+    <http://www.w3.org/ns/ldp#insertedContentRelation> rdf:value .
+}
+
+<http://127.0.1.1:8080/stations/cpuStorageStation1/properties/recipe> {
+  <http://127.0.1.1:8080/stations/cpuStorageStation1/properties/recipe> rdf:value <http://127.0.1.1:8080/recipes/cpuRecipe> .
+}
+
+<http://127.0.1.1:8080/stations/cpuStorageStation1/tasks> {
+  <http://127.0.1.1:8080/stations/cpuStorageStation1/tasks> a <http://www.w3.org/ns/ldp#OrderedContainer>,
+      <http://arena2036.example.org/TaskContainer>;
+    <http://www.w3.org/ns/ldp#membershipResource> <http://127.0.1.1:8080/stations/cpuStorageStation1>;
+    <http://www.w3.org/ns/ldp#hasMemberRelation> <http://arena2036.example.org/activeTask>;
+    <http://www.w3.org/ns/ldp#orderContentRelation> <http://arena2036.example.org/queuePosition> .
+}
+
+<http://127.0.1.1:8080/stations/cpuStorageStation1/affordances> {
+  <http://127.0.1.1:8080/stations/cpuStorageStation1/affordances> a <http://www.w3.org/ns/ldp#DirectContainer>,
+      <http://arena2036.example.org/AffordanceContainer>;
+    <http://www.w3.org/ns/ldp#membershipResource> <http://127.0.1.1:8080/stations/cpuStorageStation1>;
+    <http://www.w3.org/ns/ldp#hasMemberRelation> <http://arena2036.example.org/affords> .
+}
+
+<http://127.0.1.1:8080/stations/boardStorageStation1> {
+  <http://127.0.1.1:8080/stations/boardStorageStation1> a <http://arena2036.example.org/Workstation>;
+    <http://www.w3.org/ns/ldp#contains> <http://127.0.1.1:8080/stations/boardStorageStation1/properties>,
+      <http://127.0.1.1:8080/stations/boardStorageStation1/tasks>, <http://127.0.1.1:8080/stations/boardStorageStation1/affordances>;
+    <http://arena2036.example.org/locationX1> 0;
+    <http://arena2036.example.org/locationY1> 10;
+    <http://arena2036.example.org/locationX2> 1;
+    <http://arena2036.example.org/locationY2> 11;
+    <http://arena2036.example.org/skills> <http://arena2036.example.org/boardStorage>;
+    <http://arena2036.example.org/status> <http://arena2036.example.org/idle>;
+    <http://arena2036.example.org/outputPort> _:genid-05e8f0b3f193422ab8deacd5530e32bb-boardStorage1output;
+    <http://arena2036.example.org/recipe> <http://127.0.1.1:8080/recipes/mainboardRecipe> .
+  
+  _:genid-05e8f0b3f193422ab8deacd5530e32bb-boardStorage1output a <http://arena2036.example.org/Port>;
+    <http://arena2036.example.org/locationX> 2;
+    <http://arena2036.example.org/locationY> 11;
+    <http://arena2036.example.org/capacity> 2 .
+}
+
+<http://127.0.1.1:8080/stations/boardStorageStation1/properties> {
+  <http://127.0.1.1:8080/stations/boardStorageStation1/properties> a <http://www.w3.org/ns/ldp#IndirectContainer>,
+      <http://arena2036.example.org/PropertyContainer>;
+    <http://www.w3.org/ns/ldp#contains> <http://127.0.1.1:8080/stations/boardStorageStation1/properties/recipe>;
+    <http://www.w3.org/ns/ldp#membershipResource> <http://127.0.1.1:8080/stations/boardStorageStation1>;
+    <http://www.w3.org/ns/ldp#hasMemberRelation> <http://arena2036.example.org/recipe>;
+    <http://www.w3.org/ns/ldp#insertedContentRelation> rdf:value .
+}
+
+<http://127.0.1.1:8080/stations/boardStorageStation1/properties/recipe> {
+  <http://127.0.1.1:8080/stations/boardStorageStation1/properties/recipe> rdf:value
+      <http://127.0.1.1:8080/recipes/mainboardRecipe> .
+}
+
+<http://127.0.1.1:8080/stations/boardStorageStation1/tasks> {
+  <http://127.0.1.1:8080/stations/boardStorageStation1/tasks> a <http://www.w3.org/ns/ldp#OrderedContainer>,
+      <http://arena2036.example.org/TaskContainer>;
+    <http://www.w3.org/ns/ldp#membershipResource> <http://127.0.1.1:8080/stations/boardStorageStation1>;
+    <http://www.w3.org/ns/ldp#hasMemberRelation> <http://arena2036.example.org/activeTask>;
+    <http://www.w3.org/ns/ldp#orderContentRelation> <http://arena2036.example.org/queuePosition> .
+}
+
+<http://127.0.1.1:8080/stations/boardStorageStation1/affordances> {
+  <http://127.0.1.1:8080/stations/boardStorageStation1/affordances> a <http://www.w3.org/ns/ldp#DirectContainer>,
+      <http://arena2036.example.org/AffordanceContainer>;
+    <http://www.w3.org/ns/ldp#membershipResource> <http://127.0.1.1:8080/stations/boardStorageStation1>;
+    <http://www.w3.org/ns/ldp#hasMemberRelation> <http://arena2036.example.org/affords> .
+}
+
+<http://127.0.1.1:8080/transporters/fastTransporter1> {
+  <http://127.0.1.1:8080/transporters/fastTransporter1> a <http://arena2036.example.org/Transporter>;
+    <http://www.w3.org/ns/ldp#contains> <http://127.0.1.1:8080/transporters/fastTransporter1/tasks>,
+      <http://127.0.1.1:8080/transporters/fastTransporter1/affordances>;
+    <http://arena2036.example.org/status> <http://arena2036.example.org/idle>;
+    <http://arena2036.example.org/locationX> 5;
+    <http://arena2036.example.org/locationY> 0;
+    <http://arena2036.example.org/capacity> 2;
+    <http://arena2036.example.org/speed> 1.0;
+    :simulatedLocationX 5;
+    :simulatedLocationY 0 .
+}
+
+<http://127.0.1.1:8080/transporters/fastTransporter1/tasks> {
+  <http://127.0.1.1:8080/transporters/fastTransporter1/tasks> a <http://www.w3.org/ns/ldp#OrderedContainer>,
+      <http://arena2036.example.org/TaskContainer>;
+    <http://www.w3.org/ns/ldp#membershipResource> <http://127.0.1.1:8080/transporters/fastTransporter1>;
+    <http://www.w3.org/ns/ldp#hasMemberRelation> <http://arena2036.example.org/activeTask>;
+    <http://www.w3.org/ns/ldp#orderContentRelation> <http://arena2036.example.org/queuePosition> .
+}
+
+<http://127.0.1.1:8080/transporters/fastTransporter1/affordances> {
+  <http://127.0.1.1:8080/transporters/fastTransporter1/affordances> a <http://www.w3.org/ns/ldp#DirectContainer>,
+      <http://arena2036.example.org/AffordanceContainer>;
+    <http://www.w3.org/ns/ldp#membershipResource> <http://127.0.1.1:8080/transporters/fastTransporter1>;
+    <http://www.w3.org/ns/ldp#hasMemberRelation> <http://arena2036.example.org/affords> .
+}

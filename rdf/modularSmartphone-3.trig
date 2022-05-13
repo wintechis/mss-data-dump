@@ -1,0 +1,720 @@
+@prefix : <http://ti.rw.fau.de/sim#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix fn: <http://www.w3.org/2005/xpath-functions#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix sesame: <http://www.openrdf.org/schema/sesame#> .
+@prefix time: <http://www.w3.org/2006/time#> .
+@prefix rdf4j: <http://rdf4j.org/schema/rdf4j#> .
+
+<http://127.0.1.1:8080/sim> {
+  <http://127.0.1.1:8080/sim> :initialTime "2020-05-21T08:00:00Z"^^xsd:dateTime;
+    :timeslotDuration 100;
+    :iterations 500;
+    :seed 1234;
+    :currentIteration 3;
+    :currentTime _:node1f7nv8avax7 .
+  
+  _:node1f7nv8avax7 time:inXSDDateTimeStamp "2020-05-21T08:00:00.300Z"^^xsd:dateTime;
+    time:inDateTime _:node1f7nv8avax8 .
+  
+  _:node1f7nv8avax8 time:year 2020;
+    time:month 5;
+    time:day 21;
+    time:hour 8;
+    time:minute 0;
+    time:second 0.3 .
+}
+
+<http://127.0.1.1:8080/> {
+  <http://127.0.1.1:8080/> a <http://www.w3.org/ns/ldp#BasicContainer>;
+    <http://www.w3.org/ns/ldp#contains> <http://127.0.1.1:8080/recipes>, <http://127.0.1.1:8080/stations>,
+      <http://127.0.1.1:8080/transporters>, <http://127.0.1.1:8080/shopfloor> .
+}
+
+<http://127.0.1.1:8080/recipes> {
+  <http://127.0.1.1:8080/recipes> a <http://www.w3.org/ns/ldp#BasicContainer>;
+    <http://www.w3.org/ns/ldp#contains> <http://127.0.1.1:8080/recipes/mainboardRecipe>,
+      <http://127.0.1.1:8080/recipes/cpuRecipe>, <http://127.0.1.1:8080/recipes/ramRecipe>,
+      <http://127.0.1.1:8080/recipes/flashMemoryRecipe>, <http://127.0.1.1:8080/recipes/mainModuleRecipe> .
+}
+
+<http://127.0.1.1:8080/recipes/mainboardRecipe> {
+  <http://127.0.1.1:8080/recipes/mainboardRecipe> a <http://arena2036.example.org/Recipe>;
+    <http://arena2036.example.org/requiresSkill> <http://arena2036.example.org/boardStorage>;
+    <http://arena2036.example.org/requiresProducts> <http://arena2036.example.org/none>;
+    <http://arena2036.example.org/yieldsProducts> <http://arena2036.example.org/mainboard>;
+    <http://arena2036.example.org/baseProcessingTime> 4;
+    <http://arena2036.example.org/processingTimeVariance> 1 .
+}
+
+<http://127.0.1.1:8080/recipes/cpuRecipe> {
+  <http://127.0.1.1:8080/recipes/cpuRecipe> a <http://arena2036.example.org/Recipe>;
+    <http://arena2036.example.org/requiresSkill> <http://arena2036.example.org/cpuStorage>;
+    <http://arena2036.example.org/requiresProducts> <http://arena2036.example.org/none>;
+    <http://arena2036.example.org/yieldsProducts> <http://arena2036.example.org/cpu>;
+    <http://arena2036.example.org/baseProcessingTime> 5;
+    <http://arena2036.example.org/processingTimeVariance> 1 .
+}
+
+<http://127.0.1.1:8080/recipes/ramRecipe> {
+  <http://127.0.1.1:8080/recipes/ramRecipe> a <http://arena2036.example.org/Recipe>;
+    <http://arena2036.example.org/requiresSkill> <http://arena2036.example.org/memoryStorage>;
+    <http://arena2036.example.org/requiresProducts> <http://arena2036.example.org/none>;
+    <http://arena2036.example.org/yieldsProducts> <http://arena2036.example.org/ram>;
+    <http://arena2036.example.org/baseProcessingTime> 3;
+    <http://arena2036.example.org/processingTimeVariance> 1 .
+}
+
+<http://127.0.1.1:8080/stations> {
+  <http://127.0.1.1:8080/stations> a <http://www.w3.org/ns/ldp#BasicContainer>;
+    <http://www.w3.org/ns/ldp#contains> <http://127.0.1.1:8080/stations/solderingStation1>,
+      <http://127.0.1.1:8080/stations/memoryStorageStation1>, <http://127.0.1.1:8080/stations/cpuStorageStation1>,
+      <http://127.0.1.1:8080/stations/boardStorageStation1> .
+}
+
+<http://127.0.1.1:8080/transporters> {
+  <http://127.0.1.1:8080/transporters> a <http://www.w3.org/ns/ldp#BasicContainer>;
+    <http://www.w3.org/ns/ldp#contains> <http://127.0.1.1:8080/transporters/fastTransporter1> .
+}
+
+<http://127.0.1.1:8080/recipes/flashMemoryRecipe> {
+  <http://127.0.1.1:8080/recipes/flashMemoryRecipe> a <http://arena2036.example.org/Recipe>;
+    <http://arena2036.example.org/requiresSkill> <http://arena2036.example.org/memoryStorage>;
+    <http://arena2036.example.org/requiresProducts> <http://arena2036.example.org/none>;
+    <http://arena2036.example.org/yieldsProducts> <http://arena2036.example.org/flashMemory>;
+    <http://arena2036.example.org/baseProcessingTime> 4;
+    <http://arena2036.example.org/processingTimeVariance> 1;
+    <http://arena2036.example.org/inputProcessingTime> 0 .
+}
+
+<http://127.0.1.1:8080/recipes/mainModuleRecipe> {
+  <http://127.0.1.1:8080/recipes/mainModuleRecipe> a <http://arena2036.example.org/Recipe>;
+    <http://arena2036.example.org/requiresSkill> <http://arena2036.example.org/soldering>;
+    <http://arena2036.example.org/requiresProducts> <http://arena2036.example.org/mainboard>,
+      <http://arena2036.example.org/cpu>, <http://arena2036.example.org/ram>, <http://arena2036.example.org/flashMemory>;
+    <http://arena2036.example.org/yieldsProducts> <http://arena2036.example.org/mainModule>;
+    <http://arena2036.example.org/baseProcessingTime> 6;
+    <http://arena2036.example.org/processingTimeVariance> 2;
+    <http://arena2036.example.org/inputProcessingTime> 1 .
+}
+
+<http://127.0.1.1:8080/shopfloor> {
+  <http://127.0.1.1:8080/shopfloor> a <http://arena2036.example.org/Shopfloor>;
+    <http://arena2036.example.org/sizeX> 15;
+    <http://arena2036.example.org/sizeY> 15 .
+}
+
+<http://127.0.1.1:8080/stations/solderingStation1> {
+  <http://127.0.1.1:8080/stations/solderingStation1> a <http://www.w3.org/ns/ldp#BasicContainer>,
+      <http://arena2036.example.org/Workstation>;
+    <http://www.w3.org/ns/ldp#contains> <http://127.0.1.1:8080/stations/solderingStation1/properties>,
+      <http://127.0.1.1:8080/stations/solderingStation1/tasks>, <http://127.0.1.1:8080/stations/solderingStation1/affordances>;
+    <http://arena2036.example.org/locationX1> 9;
+    <http://arena2036.example.org/locationY1> 7;
+    <http://arena2036.example.org/locationX2> 12;
+    <http://arena2036.example.org/locationY2> 8;
+    <http://arena2036.example.org/skills> <http://arena2036.example.org/soldering>;
+    <http://arena2036.example.org/status> <http://arena2036.example.org/idle>;
+    <http://arena2036.example.org/inputPort> _:genid-05e8f0b3f193422ab8deacd5530e32bb-soldering1input;
+    <http://arena2036.example.org/outputPort> _:genid-05e8f0b3f193422ab8deacd5530e32bb-soldering1output;
+    <http://arena2036.example.org/affords> <http://127.0.1.1:8080/stations/solderingStation1/affordances/e28c1e74-0f34-440a-93ed-d8e9833ad269>;
+    <http://arena2036.example.org/recipe> <http://127.0.1.1:8080/recipes/mainModuleRecipe> .
+  
+  _:genid-05e8f0b3f193422ab8deacd5530e32bb-soldering1input a <http://arena2036.example.org/Port>;
+    <http://arena2036.example.org/locationX> 8;
+    <http://arena2036.example.org/locationY> 7;
+    <http://arena2036.example.org/capacity> 5 .
+  
+  _:genid-05e8f0b3f193422ab8deacd5530e32bb-soldering1output a <http://arena2036.example.org/Port>;
+    <http://arena2036.example.org/locationX> 13;
+    <http://arena2036.example.org/locationY> 8;
+    <http://arena2036.example.org/capacity> 2 .
+}
+
+<http://127.0.1.1:8080/stations/solderingStation1/properties> {
+  <http://127.0.1.1:8080/stations/solderingStation1/properties> a <http://www.w3.org/ns/ldp#IndirectContainer>,
+      <http://arena2036.example.org/PropertyContainer>;
+    <http://www.w3.org/ns/ldp#contains> <http://127.0.1.1:8080/stations/solderingStation1/properties/recipe>;
+    <http://www.w3.org/ns/ldp#membershipResource> <http://127.0.1.1:8080/stations/solderingStation1>;
+    <http://www.w3.org/ns/ldp#hasMemberRelation> <http://arena2036.example.org/recipe>;
+    <http://www.w3.org/ns/ldp#insertedContentRelation> rdf:value .
+}
+
+<http://127.0.1.1:8080/stations/solderingStation1/properties/recipe> {
+  <http://127.0.1.1:8080/stations/solderingStation1/properties/recipe> rdf:value <http://127.0.1.1:8080/recipes/mainModuleRecipe> .
+}
+
+<http://127.0.1.1:8080/stations/solderingStation1/tasks> {
+  <http://127.0.1.1:8080/stations/solderingStation1/tasks> a <http://www.w3.org/ns/ldp#OrderedContainer>,
+      <http://arena2036.example.org/TaskContainer>;
+    <http://www.w3.org/ns/ldp#membershipResource> <http://127.0.1.1:8080/stations/solderingStation1>;
+    <http://www.w3.org/ns/ldp#hasMemberRelation> <http://arena2036.example.org/activeTask>;
+    <http://www.w3.org/ns/ldp#orderContentRelation> <http://arena2036.example.org/queuePosition> .
+}
+
+<http://127.0.1.1:8080/stations/solderingStation1/affordances> {
+  <http://127.0.1.1:8080/stations/solderingStation1/affordances> a <http://www.w3.org/ns/ldp#DirectContainer>,
+      <http://arena2036.example.org/AffordanceContainer>;
+    <http://www.w3.org/ns/ldp#membershipResource> <http://127.0.1.1:8080/stations/solderingStation1>;
+    <http://www.w3.org/ns/ldp#hasMemberRelation> <http://arena2036.example.org/affords>;
+    <http://www.w3.org/ns/ldp#contains> <http://127.0.1.1:8080/stations/solderingStation1/affordances/e28c1e74-0f34-440a-93ed-d8e9833ad269> .
+}
+
+<http://127.0.1.1:8080/stations/memoryStorageStation1> {
+  <http://127.0.1.1:8080/stations/memoryStorageStation1> a <http://arena2036.example.org/Workstation>;
+    <http://www.w3.org/ns/ldp#contains> <http://127.0.1.1:8080/stations/memoryStorageStation1/properties>,
+      <http://127.0.1.1:8080/stations/memoryStorageStation1/tasks>, <http://127.0.1.1:8080/stations/memoryStorageStation1/affordances>;
+    <http://arena2036.example.org/locationX1> 0;
+    <http://arena2036.example.org/locationY1> 0;
+    <http://arena2036.example.org/locationX2> 1;
+    <http://arena2036.example.org/locationY2> 1;
+    <http://arena2036.example.org/skills> <http://arena2036.example.org/memoryStorage>;
+    <http://arena2036.example.org/status> <http://arena2036.example.org/idle>;
+    <http://arena2036.example.org/outputPort> _:genid-05e8f0b3f193422ab8deacd5530e32bb-memoryStorage1output;
+    <http://arena2036.example.org/affords> <http://127.0.1.1:8080/stations/memoryStorageStation1/affordances/492e76dd-16d8-4831-a418-4beee6845274>,
+      <http://127.0.1.1:8080/stations/memoryStorageStation1/affordances/47aa8243-cdf5-4efe-ae5e-cf16f4063ded>;
+    <http://arena2036.example.org/recipe> <http://127.0.1.1:8080/recipes/ramRecipe> .
+  
+  _:genid-05e8f0b3f193422ab8deacd5530e32bb-memoryStorage1output a <http://arena2036.example.org/Port>;
+    <http://arena2036.example.org/locationX> 2;
+    <http://arena2036.example.org/locationY> 1;
+    <http://arena2036.example.org/capacity> 2 .
+}
+
+<http://127.0.1.1:8080/stations/memoryStorageStation1/properties> {
+  <http://127.0.1.1:8080/stations/memoryStorageStation1/properties> a <http://www.w3.org/ns/ldp#IndirectContainer>,
+      <http://arena2036.example.org/PropertyContainer>;
+    <http://www.w3.org/ns/ldp#contains> <http://127.0.1.1:8080/stations/memoryStorageStation1/properties/recipe>;
+    <http://www.w3.org/ns/ldp#membershipResource> <http://127.0.1.1:8080/stations/memoryStorageStation1>;
+    <http://www.w3.org/ns/ldp#hasMemberRelation> <http://arena2036.example.org/recipe>;
+    <http://www.w3.org/ns/ldp#insertedContentRelation> rdf:value .
+}
+
+<http://127.0.1.1:8080/stations/memoryStorageStation1/properties/recipe> {
+  <http://127.0.1.1:8080/stations/memoryStorageStation1/properties/recipe> rdf:value
+      <http://127.0.1.1:8080/recipes/ramRecipe> .
+}
+
+<http://127.0.1.1:8080/stations/memoryStorageStation1/tasks> {
+  <http://127.0.1.1:8080/stations/memoryStorageStation1/tasks> a <http://www.w3.org/ns/ldp#OrderedContainer>,
+      <http://arena2036.example.org/TaskContainer>;
+    <http://www.w3.org/ns/ldp#membershipResource> <http://127.0.1.1:8080/stations/memoryStorageStation1>;
+    <http://www.w3.org/ns/ldp#hasMemberRelation> <http://arena2036.example.org/activeTask>;
+    <http://www.w3.org/ns/ldp#orderContentRelation> <http://arena2036.example.org/queuePosition> .
+}
+
+<http://127.0.1.1:8080/stations/memoryStorageStation1/affordances> {
+  <http://127.0.1.1:8080/stations/memoryStorageStation1/affordances> a <http://www.w3.org/ns/ldp#DirectContainer>,
+      <http://arena2036.example.org/AffordanceContainer>;
+    <http://www.w3.org/ns/ldp#membershipResource> <http://127.0.1.1:8080/stations/memoryStorageStation1>;
+    <http://www.w3.org/ns/ldp#hasMemberRelation> <http://arena2036.example.org/affords>;
+    <http://www.w3.org/ns/ldp#contains> <http://127.0.1.1:8080/stations/memoryStorageStation1/affordances/492e76dd-16d8-4831-a418-4beee6845274>,
+      <http://127.0.1.1:8080/stations/memoryStorageStation1/affordances/47aa8243-cdf5-4efe-ae5e-cf16f4063ded> .
+}
+
+<http://127.0.1.1:8080/stations/cpuStorageStation1> {
+  <http://127.0.1.1:8080/stations/cpuStorageStation1> a <http://arena2036.example.org/Workstation>;
+    <http://www.w3.org/ns/ldp#contains> <http://127.0.1.1:8080/stations/cpuStorageStation1/properties>,
+      <http://127.0.1.1:8080/stations/cpuStorageStation1/tasks>, <http://127.0.1.1:8080/stations/cpuStorageStation1/affordances>;
+    <http://arena2036.example.org/locationX1> 0;
+    <http://arena2036.example.org/locationY1> 5;
+    <http://arena2036.example.org/locationX2> 1;
+    <http://arena2036.example.org/locationY2> 6;
+    <http://arena2036.example.org/skills> <http://arena2036.example.org/cpuStorage>;
+    <http://arena2036.example.org/status> <http://arena2036.example.org/idle>;
+    <http://arena2036.example.org/outputPort> _:genid-05e8f0b3f193422ab8deacd5530e32bb-cpuStorage1output;
+    <http://arena2036.example.org/affords> <http://127.0.1.1:8080/stations/cpuStorageStation1/affordances/19390e96-bf8d-4c91-9b99-495fada63203>;
+    <http://arena2036.example.org/recipe> <http://127.0.1.1:8080/recipes/cpuRecipe> .
+  
+  _:genid-05e8f0b3f193422ab8deacd5530e32bb-cpuStorage1output a <http://arena2036.example.org/Port>;
+    <http://arena2036.example.org/locationX> 2;
+    <http://arena2036.example.org/locationY> 6;
+    <http://arena2036.example.org/capacity> 2 .
+}
+
+<http://127.0.1.1:8080/stations/cpuStorageStation1/properties> {
+  <http://127.0.1.1:8080/stations/cpuStorageStation1/properties> a <http://www.w3.org/ns/ldp#IndirectContainer>,
+      <http://arena2036.example.org/PropertyContainer>;
+    <http://www.w3.org/ns/ldp#contains> <http://127.0.1.1:8080/stations/cpuStorageStation1/properties/recipe>;
+    <http://www.w3.org/ns/ldp#membershipResource> <http://127.0.1.1:8080/stations/cpuStorageStation1>;
+    <http://www.w3.org/ns/ldp#hasMemberRelation> <http://arena2036.example.org/recipe>;
+    <http://www.w3.org/ns/ldp#insertedContentRelation> rdf:value .
+}
+
+<http://127.0.1.1:8080/stations/cpuStorageStation1/properties/recipe> {
+  <http://127.0.1.1:8080/stations/cpuStorageStation1/properties/recipe> rdf:value <http://127.0.1.1:8080/recipes/cpuRecipe> .
+}
+
+<http://127.0.1.1:8080/stations/cpuStorageStation1/tasks> {
+  <http://127.0.1.1:8080/stations/cpuStorageStation1/tasks> a <http://www.w3.org/ns/ldp#OrderedContainer>,
+      <http://arena2036.example.org/TaskContainer>;
+    <http://www.w3.org/ns/ldp#membershipResource> <http://127.0.1.1:8080/stations/cpuStorageStation1>;
+    <http://www.w3.org/ns/ldp#hasMemberRelation> <http://arena2036.example.org/activeTask>;
+    <http://www.w3.org/ns/ldp#orderContentRelation> <http://arena2036.example.org/queuePosition> .
+}
+
+<http://127.0.1.1:8080/stations/cpuStorageStation1/affordances> {
+  <http://127.0.1.1:8080/stations/cpuStorageStation1/affordances> a <http://www.w3.org/ns/ldp#DirectContainer>,
+      <http://arena2036.example.org/AffordanceContainer>;
+    <http://www.w3.org/ns/ldp#membershipResource> <http://127.0.1.1:8080/stations/cpuStorageStation1>;
+    <http://www.w3.org/ns/ldp#hasMemberRelation> <http://arena2036.example.org/affords>;
+    <http://www.w3.org/ns/ldp#contains> <http://127.0.1.1:8080/stations/cpuStorageStation1/affordances/19390e96-bf8d-4c91-9b99-495fada63203> .
+}
+
+<http://127.0.1.1:8080/stations/boardStorageStation1> {
+  <http://127.0.1.1:8080/stations/boardStorageStation1> a <http://arena2036.example.org/Workstation>;
+    <http://www.w3.org/ns/ldp#contains> <http://127.0.1.1:8080/stations/boardStorageStation1/properties>,
+      <http://127.0.1.1:8080/stations/boardStorageStation1/tasks>, <http://127.0.1.1:8080/stations/boardStorageStation1/affordances>;
+    <http://arena2036.example.org/locationX1> 0;
+    <http://arena2036.example.org/locationY1> 10;
+    <http://arena2036.example.org/locationX2> 1;
+    <http://arena2036.example.org/locationY2> 11;
+    <http://arena2036.example.org/skills> <http://arena2036.example.org/boardStorage>;
+    <http://arena2036.example.org/status> <http://arena2036.example.org/idle>;
+    <http://arena2036.example.org/outputPort> _:genid-05e8f0b3f193422ab8deacd5530e32bb-boardStorage1output;
+    <http://arena2036.example.org/affords> <http://127.0.1.1:8080/stations/boardStorageStation1/affordances/5f9fe1ee-2b36-4969-a813-fd76db65e041>;
+    <http://arena2036.example.org/recipe> <http://127.0.1.1:8080/recipes/mainboardRecipe> .
+  
+  _:genid-05e8f0b3f193422ab8deacd5530e32bb-boardStorage1output a <http://arena2036.example.org/Port>;
+    <http://arena2036.example.org/locationX> 2;
+    <http://arena2036.example.org/locationY> 11;
+    <http://arena2036.example.org/capacity> 2 .
+}
+
+<http://127.0.1.1:8080/stations/boardStorageStation1/properties> {
+  <http://127.0.1.1:8080/stations/boardStorageStation1/properties> a <http://www.w3.org/ns/ldp#IndirectContainer>,
+      <http://arena2036.example.org/PropertyContainer>;
+    <http://www.w3.org/ns/ldp#contains> <http://127.0.1.1:8080/stations/boardStorageStation1/properties/recipe>;
+    <http://www.w3.org/ns/ldp#membershipResource> <http://127.0.1.1:8080/stations/boardStorageStation1>;
+    <http://www.w3.org/ns/ldp#hasMemberRelation> <http://arena2036.example.org/recipe>;
+    <http://www.w3.org/ns/ldp#insertedContentRelation> rdf:value .
+}
+
+<http://127.0.1.1:8080/stations/boardStorageStation1/properties/recipe> {
+  <http://127.0.1.1:8080/stations/boardStorageStation1/properties/recipe> rdf:value
+      <http://127.0.1.1:8080/recipes/mainboardRecipe> .
+}
+
+<http://127.0.1.1:8080/stations/boardStorageStation1/tasks> {
+  <http://127.0.1.1:8080/stations/boardStorageStation1/tasks> a <http://www.w3.org/ns/ldp#OrderedContainer>,
+      <http://arena2036.example.org/TaskContainer>;
+    <http://www.w3.org/ns/ldp#membershipResource> <http://127.0.1.1:8080/stations/boardStorageStation1>;
+    <http://www.w3.org/ns/ldp#hasMemberRelation> <http://arena2036.example.org/activeTask>;
+    <http://www.w3.org/ns/ldp#orderContentRelation> <http://arena2036.example.org/queuePosition> .
+}
+
+<http://127.0.1.1:8080/stations/boardStorageStation1/affordances> {
+  <http://127.0.1.1:8080/stations/boardStorageStation1/affordances> a <http://www.w3.org/ns/ldp#DirectContainer>,
+      <http://arena2036.example.org/AffordanceContainer>;
+    <http://www.w3.org/ns/ldp#membershipResource> <http://127.0.1.1:8080/stations/boardStorageStation1>;
+    <http://www.w3.org/ns/ldp#hasMemberRelation> <http://arena2036.example.org/affords>;
+    <http://www.w3.org/ns/ldp#contains> <http://127.0.1.1:8080/stations/boardStorageStation1/affordances/5f9fe1ee-2b36-4969-a813-fd76db65e041> .
+}
+
+<http://127.0.1.1:8080/transporters/fastTransporter1> {
+  <http://127.0.1.1:8080/transporters/fastTransporter1> a <http://arena2036.example.org/Transporter>;
+    <http://www.w3.org/ns/ldp#contains> <http://127.0.1.1:8080/transporters/fastTransporter1/tasks>,
+      <http://127.0.1.1:8080/transporters/fastTransporter1/affordances>;
+    <http://arena2036.example.org/status> <http://arena2036.example.org/idle>;
+    <http://arena2036.example.org/locationX> 5;
+    <http://arena2036.example.org/locationY> 0;
+    <http://arena2036.example.org/capacity> 2;
+    <http://arena2036.example.org/speed> 1.0;
+    :simulatedLocationX 5;
+    :simulatedLocationY 0;
+    <http://arena2036.example.org/affords> <http://127.0.1.1:8080/transporters/fastTransporter1/affordances/d3cc2068-5033-4eb1-9439-ff2cc8bde94b>,
+      <http://127.0.1.1:8080/transporters/fastTransporter1/affordances/bced2714-b9be-4ba0-81a0-f634ddfebfea> .
+}
+
+<http://127.0.1.1:8080/transporters/fastTransporter1/tasks> {
+  <http://127.0.1.1:8080/transporters/fastTransporter1/tasks> a <http://www.w3.org/ns/ldp#OrderedContainer>,
+      <http://arena2036.example.org/TaskContainer>;
+    <http://www.w3.org/ns/ldp#membershipResource> <http://127.0.1.1:8080/transporters/fastTransporter1>;
+    <http://www.w3.org/ns/ldp#hasMemberRelation> <http://arena2036.example.org/activeTask>;
+    <http://www.w3.org/ns/ldp#orderContentRelation> <http://arena2036.example.org/queuePosition> .
+}
+
+<http://127.0.1.1:8080/transporters/fastTransporter1/affordances> {
+  <http://127.0.1.1:8080/transporters/fastTransporter1/affordances> a <http://www.w3.org/ns/ldp#DirectContainer>,
+      <http://arena2036.example.org/AffordanceContainer>;
+    <http://www.w3.org/ns/ldp#membershipResource> <http://127.0.1.1:8080/transporters/fastTransporter1>;
+    <http://www.w3.org/ns/ldp#hasMemberRelation> <http://arena2036.example.org/affords>;
+    <http://www.w3.org/ns/ldp#contains> <http://127.0.1.1:8080/transporters/fastTransporter1/affordances/d3cc2068-5033-4eb1-9439-ff2cc8bde94b>,
+      <http://127.0.1.1:8080/transporters/fastTransporter1/affordances/bced2714-b9be-4ba0-81a0-f634ddfebfea> .
+}
+
+<http://127.0.1.1:8080/stations/memoryStorageStation1/affordances/492e76dd-16d8-4831-a418-4beee6845274> {
+  <http://127.0.1.1:8080/stations/memoryStorageStation1/affordances/492e76dd-16d8-4831-a418-4beee6845274>
+    a <http://arena2036.example.org/Affordance>;
+    <http://arena2036.example.org/hasPrecondition> <http://arena2036.example.org/none>;
+    <http://arena2036.example.org/hasPostcondition> _:genid-c289a848b6a64a52a075b55df4378f01-n3-0,
+      _:genid-c289a848b6a64a52a075b55df4378f01-n3-1, _:genid-c289a848b6a64a52a075b55df4378f01-n3-2,
+      _:genid-c289a848b6a64a52a075b55df4378f01-n3-3;
+    <http://arena2036.example.org/needsTask> _:genid-c289a848b6a64a52a075b55df4378f01-n3-6;
+    <http://arena2036.example.org/estimatedTime> 3 .
+  
+  _:genid-c289a848b6a64a52a075b55df4378f01-n3-0 rdf:subject _:genid-c289a848b6a64a52a075b55df4378f01-n3-4;
+    rdf:predicate rdf:type;
+    rdf:object <http://arena2036.example.org/Product> .
+  
+  _:genid-c289a848b6a64a52a075b55df4378f01-n3-1 rdf:subject _:genid-c289a848b6a64a52a075b55df4378f01-n3-4;
+    rdf:predicate <http://arena2036.example.org/kind>;
+    rdf:object <http://arena2036.example.org/ram> .
+  
+  _:genid-c289a848b6a64a52a075b55df4378f01-n3-2 rdf:subject _:genid-c289a848b6a64a52a075b55df4378f01-n3-4;
+    rdf:predicate <http://arena2036.example.org/locationX>;
+    rdf:object 2 .
+  
+  _:genid-c289a848b6a64a52a075b55df4378f01-n3-3 rdf:subject _:genid-c289a848b6a64a52a075b55df4378f01-n3-4;
+    rdf:predicate <http://arena2036.example.org/locationY>;
+    rdf:object 1 .
+  
+  _:genid-c289a848b6a64a52a075b55df4378f01-n3-6 rdf:first _:genid-c289a848b6a64a52a075b55df4378f01-n3-5;
+    rdf:rest rdf:nil .
+  
+  _:genid-c289a848b6a64a52a075b55df4378f01-n3-5 a <http://arena2036.example.org/WorkstationTask>;
+    <http://arena2036.example.org/instrument> <http://127.0.1.1:8080/stations/memoryStorageStation1>;
+    <http://arena2036.example.org/recipe> <http://127.0.1.1:8080/recipes/ramRecipe>;
+    <http://arena2036.example.org/output> _:genid-c289a848b6a64a52a075b55df4378f01-n3-4 .
+}
+
+<http://127.0.1.1:8080/stations/memoryStorageStation1/affordances/47aa8243-cdf5-4efe-ae5e-cf16f4063ded> {
+  <http://127.0.1.1:8080/stations/memoryStorageStation1/affordances/47aa8243-cdf5-4efe-ae5e-cf16f4063ded>
+    a <http://arena2036.example.org/Affordance>;
+    <http://arena2036.example.org/hasPrecondition> <http://arena2036.example.org/none>;
+    <http://arena2036.example.org/hasPostcondition> _:genid-c2beaa1e260346b3a0fa8a1530646351-n3-7,
+      _:genid-c2beaa1e260346b3a0fa8a1530646351-n3-8, _:genid-c2beaa1e260346b3a0fa8a1530646351-n3-9,
+      _:genid-c2beaa1e260346b3a0fa8a1530646351-n3-10;
+    <http://arena2036.example.org/needsTask> _:genid-c2beaa1e260346b3a0fa8a1530646351-n3-13;
+    <http://arena2036.example.org/estimatedTime> 4 .
+  
+  _:genid-c2beaa1e260346b3a0fa8a1530646351-n3-7 rdf:subject _:genid-c2beaa1e260346b3a0fa8a1530646351-n3-11;
+    rdf:predicate rdf:type;
+    rdf:object <http://arena2036.example.org/Product> .
+  
+  _:genid-c2beaa1e260346b3a0fa8a1530646351-n3-8 rdf:subject _:genid-c2beaa1e260346b3a0fa8a1530646351-n3-11;
+    rdf:predicate <http://arena2036.example.org/kind>;
+    rdf:object <http://arena2036.example.org/flashMemory> .
+  
+  _:genid-c2beaa1e260346b3a0fa8a1530646351-n3-9 rdf:subject _:genid-c2beaa1e260346b3a0fa8a1530646351-n3-11;
+    rdf:predicate <http://arena2036.example.org/locationX>;
+    rdf:object 2 .
+  
+  _:genid-c2beaa1e260346b3a0fa8a1530646351-n3-10 rdf:subject _:genid-c2beaa1e260346b3a0fa8a1530646351-n3-11;
+    rdf:predicate <http://arena2036.example.org/locationY>;
+    rdf:object 1 .
+  
+  _:genid-c2beaa1e260346b3a0fa8a1530646351-n3-13 rdf:first _:genid-c2beaa1e260346b3a0fa8a1530646351-n3-12;
+    rdf:rest rdf:nil .
+  
+  _:genid-c2beaa1e260346b3a0fa8a1530646351-n3-12 a <http://arena2036.example.org/WorkstationTask>;
+    <http://arena2036.example.org/instrument> <http://127.0.1.1:8080/stations/memoryStorageStation1>;
+    <http://arena2036.example.org/recipe> <http://127.0.1.1:8080/recipes/flashMemoryRecipe>;
+    <http://arena2036.example.org/output> _:genid-c2beaa1e260346b3a0fa8a1530646351-n3-11 .
+}
+
+<http://127.0.1.1:8080/stations/cpuStorageStation1/affordances/19390e96-bf8d-4c91-9b99-495fada63203> {
+  <http://127.0.1.1:8080/stations/cpuStorageStation1/affordances/19390e96-bf8d-4c91-9b99-495fada63203>
+    a <http://arena2036.example.org/Affordance>;
+    <http://arena2036.example.org/hasPrecondition> <http://arena2036.example.org/none>;
+    <http://arena2036.example.org/hasPostcondition> _:genid-55efeb11b9b846d59dce4be00ef85345-n3-14,
+      _:genid-55efeb11b9b846d59dce4be00ef85345-n3-15, _:genid-55efeb11b9b846d59dce4be00ef85345-n3-16,
+      _:genid-55efeb11b9b846d59dce4be00ef85345-n3-17;
+    <http://arena2036.example.org/needsTask> _:genid-55efeb11b9b846d59dce4be00ef85345-n3-20;
+    <http://arena2036.example.org/estimatedTime> 5 .
+  
+  _:genid-55efeb11b9b846d59dce4be00ef85345-n3-14 rdf:subject _:genid-55efeb11b9b846d59dce4be00ef85345-n3-18;
+    rdf:predicate rdf:type;
+    rdf:object <http://arena2036.example.org/Product> .
+  
+  _:genid-55efeb11b9b846d59dce4be00ef85345-n3-15 rdf:subject _:genid-55efeb11b9b846d59dce4be00ef85345-n3-18;
+    rdf:predicate <http://arena2036.example.org/kind>;
+    rdf:object <http://arena2036.example.org/cpu> .
+  
+  _:genid-55efeb11b9b846d59dce4be00ef85345-n3-16 rdf:subject _:genid-55efeb11b9b846d59dce4be00ef85345-n3-18;
+    rdf:predicate <http://arena2036.example.org/locationX>;
+    rdf:object 2 .
+  
+  _:genid-55efeb11b9b846d59dce4be00ef85345-n3-17 rdf:subject _:genid-55efeb11b9b846d59dce4be00ef85345-n3-18;
+    rdf:predicate <http://arena2036.example.org/locationY>;
+    rdf:object 6 .
+  
+  _:genid-55efeb11b9b846d59dce4be00ef85345-n3-20 rdf:first _:genid-55efeb11b9b846d59dce4be00ef85345-n3-19;
+    rdf:rest rdf:nil .
+  
+  _:genid-55efeb11b9b846d59dce4be00ef85345-n3-19 a <http://arena2036.example.org/WorkstationTask>;
+    <http://arena2036.example.org/instrument> <http://127.0.1.1:8080/stations/cpuStorageStation1>;
+    <http://arena2036.example.org/recipe> <http://127.0.1.1:8080/recipes/cpuRecipe>;
+    <http://arena2036.example.org/output> _:genid-55efeb11b9b846d59dce4be00ef85345-n3-18 .
+}
+
+<http://127.0.1.1:8080/stations/boardStorageStation1/affordances/5f9fe1ee-2b36-4969-a813-fd76db65e041> {
+  <http://127.0.1.1:8080/stations/boardStorageStation1/affordances/5f9fe1ee-2b36-4969-a813-fd76db65e041>
+    a <http://arena2036.example.org/Affordance>;
+    <http://arena2036.example.org/hasPrecondition> <http://arena2036.example.org/none>;
+    <http://arena2036.example.org/hasPostcondition> _:genid-345a7fa287434fa6ad6549b6ffba3648-n3-21,
+      _:genid-345a7fa287434fa6ad6549b6ffba3648-n3-22, _:genid-345a7fa287434fa6ad6549b6ffba3648-n3-23,
+      _:genid-345a7fa287434fa6ad6549b6ffba3648-n3-24;
+    <http://arena2036.example.org/needsTask> _:genid-345a7fa287434fa6ad6549b6ffba3648-n3-27;
+    <http://arena2036.example.org/estimatedTime> 4 .
+  
+  _:genid-345a7fa287434fa6ad6549b6ffba3648-n3-21 rdf:subject _:genid-345a7fa287434fa6ad6549b6ffba3648-n3-25;
+    rdf:predicate rdf:type;
+    rdf:object <http://arena2036.example.org/Product> .
+  
+  _:genid-345a7fa287434fa6ad6549b6ffba3648-n3-22 rdf:subject _:genid-345a7fa287434fa6ad6549b6ffba3648-n3-25;
+    rdf:predicate <http://arena2036.example.org/kind>;
+    rdf:object <http://arena2036.example.org/mainboard> .
+  
+  _:genid-345a7fa287434fa6ad6549b6ffba3648-n3-23 rdf:subject _:genid-345a7fa287434fa6ad6549b6ffba3648-n3-25;
+    rdf:predicate <http://arena2036.example.org/locationX>;
+    rdf:object 2 .
+  
+  _:genid-345a7fa287434fa6ad6549b6ffba3648-n3-24 rdf:subject _:genid-345a7fa287434fa6ad6549b6ffba3648-n3-25;
+    rdf:predicate <http://arena2036.example.org/locationY>;
+    rdf:object 11 .
+  
+  _:genid-345a7fa287434fa6ad6549b6ffba3648-n3-27 rdf:first _:genid-345a7fa287434fa6ad6549b6ffba3648-n3-26;
+    rdf:rest rdf:nil .
+  
+  _:genid-345a7fa287434fa6ad6549b6ffba3648-n3-26 a <http://arena2036.example.org/WorkstationTask>;
+    <http://arena2036.example.org/instrument> <http://127.0.1.1:8080/stations/boardStorageStation1>;
+    <http://arena2036.example.org/recipe> <http://127.0.1.1:8080/recipes/mainboardRecipe>;
+    <http://arena2036.example.org/output> _:genid-345a7fa287434fa6ad6549b6ffba3648-n3-25 .
+}
+
+<http://127.0.1.1:8080/stations/solderingStation1/affordances/e28c1e74-0f34-440a-93ed-d8e9833ad269> {
+  <http://127.0.1.1:8080/stations/solderingStation1/affordances/e28c1e74-0f34-440a-93ed-d8e9833ad269>
+    a <http://arena2036.example.org/Affordance>;
+    <http://arena2036.example.org/hasPrecondition> _:genid-7aca45c3e42f4f3daa65f0a9c4c38374-n3-31,
+      _:genid-7aca45c3e42f4f3daa65f0a9c4c38374-n3-32, _:genid-7aca45c3e42f4f3daa65f0a9c4c38374-n3-33,
+      _:genid-7aca45c3e42f4f3daa65f0a9c4c38374-n3-34, _:genid-7aca45c3e42f4f3daa65f0a9c4c38374-n3-36,
+      _:genid-7aca45c3e42f4f3daa65f0a9c4c38374-n3-37, _:genid-7aca45c3e42f4f3daa65f0a9c4c38374-n3-38,
+      _:genid-7aca45c3e42f4f3daa65f0a9c4c38374-n3-39, _:genid-7aca45c3e42f4f3daa65f0a9c4c38374-n3-41,
+      _:genid-7aca45c3e42f4f3daa65f0a9c4c38374-n3-42, _:genid-7aca45c3e42f4f3daa65f0a9c4c38374-n3-43,
+      _:genid-7aca45c3e42f4f3daa65f0a9c4c38374-n3-44, _:genid-7aca45c3e42f4f3daa65f0a9c4c38374-n3-46,
+      _:genid-7aca45c3e42f4f3daa65f0a9c4c38374-n3-47, _:genid-7aca45c3e42f4f3daa65f0a9c4c38374-n3-48,
+      _:genid-7aca45c3e42f4f3daa65f0a9c4c38374-n3-49;
+    <http://arena2036.example.org/hasPostcondition> _:genid-7aca45c3e42f4f3daa65f0a9c4c38374-n3-51,
+      _:genid-7aca45c3e42f4f3daa65f0a9c4c38374-n3-52, _:genid-7aca45c3e42f4f3daa65f0a9c4c38374-n3-53,
+      _:genid-7aca45c3e42f4f3daa65f0a9c4c38374-n3-54;
+    <http://arena2036.example.org/needsTask> _:genid-7aca45c3e42f4f3daa65f0a9c4c38374-n3-29;
+    <http://arena2036.example.org/estimatedTime> 6 .
+  
+  _:genid-7aca45c3e42f4f3daa65f0a9c4c38374-n3-31 rdf:subject _:genid-7aca45c3e42f4f3daa65f0a9c4c38374-n3-30;
+    rdf:predicate rdf:type;
+    rdf:object <http://arena2036.example.org/Product> .
+  
+  _:genid-7aca45c3e42f4f3daa65f0a9c4c38374-n3-32 rdf:subject _:genid-7aca45c3e42f4f3daa65f0a9c4c38374-n3-30;
+    rdf:predicate <http://arena2036.example.org/kind>;
+    rdf:object <http://arena2036.example.org/mainboard> .
+  
+  _:genid-7aca45c3e42f4f3daa65f0a9c4c38374-n3-33 rdf:subject _:genid-7aca45c3e42f4f3daa65f0a9c4c38374-n3-30;
+    rdf:predicate <http://arena2036.example.org/locationX>;
+    rdf:object 8 .
+  
+  _:genid-7aca45c3e42f4f3daa65f0a9c4c38374-n3-34 rdf:subject _:genid-7aca45c3e42f4f3daa65f0a9c4c38374-n3-30;
+    rdf:predicate <http://arena2036.example.org/locationY>;
+    rdf:object 7 .
+  
+  _:genid-7aca45c3e42f4f3daa65f0a9c4c38374-n3-28 a <http://arena2036.example.org/WorkstationTask>;
+    <http://arena2036.example.org/input> _:genid-7aca45c3e42f4f3daa65f0a9c4c38374-n3-30,
+      _:genid-7aca45c3e42f4f3daa65f0a9c4c38374-n3-35, _:genid-7aca45c3e42f4f3daa65f0a9c4c38374-n3-40,
+      _:genid-7aca45c3e42f4f3daa65f0a9c4c38374-n3-45;
+    <http://arena2036.example.org/output> _:genid-7aca45c3e42f4f3daa65f0a9c4c38374-n3-50;
+    <http://arena2036.example.org/instrument> <http://127.0.1.1:8080/stations/solderingStation1>;
+    <http://arena2036.example.org/recipe> <http://127.0.1.1:8080/recipes/mainModuleRecipe> .
+  
+  _:genid-7aca45c3e42f4f3daa65f0a9c4c38374-n3-36 rdf:subject _:genid-7aca45c3e42f4f3daa65f0a9c4c38374-n3-35;
+    rdf:predicate rdf:type;
+    rdf:object <http://arena2036.example.org/Product> .
+  
+  _:genid-7aca45c3e42f4f3daa65f0a9c4c38374-n3-37 rdf:subject _:genid-7aca45c3e42f4f3daa65f0a9c4c38374-n3-35;
+    rdf:predicate <http://arena2036.example.org/kind>;
+    rdf:object <http://arena2036.example.org/cpu> .
+  
+  _:genid-7aca45c3e42f4f3daa65f0a9c4c38374-n3-38 rdf:subject _:genid-7aca45c3e42f4f3daa65f0a9c4c38374-n3-35;
+    rdf:predicate <http://arena2036.example.org/locationX>;
+    rdf:object 8 .
+  
+  _:genid-7aca45c3e42f4f3daa65f0a9c4c38374-n3-39 rdf:subject _:genid-7aca45c3e42f4f3daa65f0a9c4c38374-n3-35;
+    rdf:predicate <http://arena2036.example.org/locationY>;
+    rdf:object 7 .
+  
+  _:genid-7aca45c3e42f4f3daa65f0a9c4c38374-n3-41 rdf:subject _:genid-7aca45c3e42f4f3daa65f0a9c4c38374-n3-40;
+    rdf:predicate rdf:type;
+    rdf:object <http://arena2036.example.org/Product> .
+  
+  _:genid-7aca45c3e42f4f3daa65f0a9c4c38374-n3-42 rdf:subject _:genid-7aca45c3e42f4f3daa65f0a9c4c38374-n3-40;
+    rdf:predicate <http://arena2036.example.org/kind>;
+    rdf:object <http://arena2036.example.org/ram> .
+  
+  _:genid-7aca45c3e42f4f3daa65f0a9c4c38374-n3-43 rdf:subject _:genid-7aca45c3e42f4f3daa65f0a9c4c38374-n3-40;
+    rdf:predicate <http://arena2036.example.org/locationX>;
+    rdf:object 8 .
+  
+  _:genid-7aca45c3e42f4f3daa65f0a9c4c38374-n3-44 rdf:subject _:genid-7aca45c3e42f4f3daa65f0a9c4c38374-n3-40;
+    rdf:predicate <http://arena2036.example.org/locationY>;
+    rdf:object 7 .
+  
+  _:genid-7aca45c3e42f4f3daa65f0a9c4c38374-n3-46 rdf:subject _:genid-7aca45c3e42f4f3daa65f0a9c4c38374-n3-45;
+    rdf:predicate rdf:type;
+    rdf:object <http://arena2036.example.org/Product> .
+  
+  _:genid-7aca45c3e42f4f3daa65f0a9c4c38374-n3-47 rdf:subject _:genid-7aca45c3e42f4f3daa65f0a9c4c38374-n3-45;
+    rdf:predicate <http://arena2036.example.org/kind>;
+    rdf:object <http://arena2036.example.org/flashMemory> .
+  
+  _:genid-7aca45c3e42f4f3daa65f0a9c4c38374-n3-48 rdf:subject _:genid-7aca45c3e42f4f3daa65f0a9c4c38374-n3-45;
+    rdf:predicate <http://arena2036.example.org/locationX>;
+    rdf:object 8 .
+  
+  _:genid-7aca45c3e42f4f3daa65f0a9c4c38374-n3-49 rdf:subject _:genid-7aca45c3e42f4f3daa65f0a9c4c38374-n3-45;
+    rdf:predicate <http://arena2036.example.org/locationY>;
+    rdf:object 7 .
+  
+  _:genid-7aca45c3e42f4f3daa65f0a9c4c38374-n3-51 rdf:subject _:genid-7aca45c3e42f4f3daa65f0a9c4c38374-n3-50;
+    rdf:predicate rdf:type;
+    rdf:object <http://arena2036.example.org/Product> .
+  
+  _:genid-7aca45c3e42f4f3daa65f0a9c4c38374-n3-52 rdf:subject _:genid-7aca45c3e42f4f3daa65f0a9c4c38374-n3-50;
+    rdf:predicate <http://arena2036.example.org/kind>;
+    rdf:object <http://arena2036.example.org/mainModule> .
+  
+  _:genid-7aca45c3e42f4f3daa65f0a9c4c38374-n3-53 rdf:subject _:genid-7aca45c3e42f4f3daa65f0a9c4c38374-n3-50;
+    rdf:predicate <http://arena2036.example.org/locationX>;
+    rdf:object 13 .
+  
+  _:genid-7aca45c3e42f4f3daa65f0a9c4c38374-n3-54 rdf:subject _:genid-7aca45c3e42f4f3daa65f0a9c4c38374-n3-50;
+    rdf:predicate <http://arena2036.example.org/locationY>;
+    rdf:object 8 .
+  
+  _:genid-7aca45c3e42f4f3daa65f0a9c4c38374-n3-29 rdf:first _:genid-7aca45c3e42f4f3daa65f0a9c4c38374-n3-28;
+    rdf:rest rdf:nil .
+}
+
+<http://127.0.1.1:8080/transporters/fastTransporter1/affordances/d3cc2068-5033-4eb1-9439-ff2cc8bde94b> {
+  <http://127.0.1.1:8080/transporters/fastTransporter1/affordances/d3cc2068-5033-4eb1-9439-ff2cc8bde94b>
+    a <http://arena2036.example.org/Affordance>;
+    <http://arena2036.example.org/needsTask> _:genid-7e1fa5a32e1b4784b38d687ca041319b-n3-56;
+    <http://arena2036.example.org/hasPostcondition> _:genid-7e1fa5a32e1b4784b38d687ca041319b-n3-60,
+      _:genid-7e1fa5a32e1b4784b38d687ca041319b-n3-61, _:genid-7e1fa5a32e1b4784b38d687ca041319b-n3-62,
+      _:genid-7e1fa5a32e1b4784b38d687ca041319b-n3-63;
+    <http://arena2036.example.org/hasPrecondition> _:genid-7e1fa5a32e1b4784b38d687ca041319b-n3-64,
+      _:genid-7e1fa5a32e1b4784b38d687ca041319b-n3-65, _:genid-7e1fa5a32e1b4784b38d687ca041319b-n3-66,
+      _:genid-7e1fa5a32e1b4784b38d687ca041319b-n3-67 .
+  
+  _:genid-7e1fa5a32e1b4784b38d687ca041319b-n3-56 rdf:first _:genid-7e1fa5a32e1b4784b38d687ca041319b-n3-58;
+    rdf:rest _:genid-7e1fa5a32e1b4784b38d687ca041319b-n3-57 .
+  
+  _:genid-7e1fa5a32e1b4784b38d687ca041319b-n3-57 rdf:first _:genid-7e1fa5a32e1b4784b38d687ca041319b-n3-59;
+    rdf:rest rdf:nil .
+  
+  _:genid-7e1fa5a32e1b4784b38d687ca041319b-n3-58 a <http://arena2036.example.org/TransporterTask>;
+    <http://arena2036.example.org/instrument> <http://127.0.1.1:8080/transporters/fastTransporter1>;
+    <http://arena2036.example.org/toLocationX> 2;
+    <http://arena2036.example.org/toLocationY> 1;
+    <http://arena2036.example.org/input> _:genid-7e1fa5a32e1b4784b38d687ca041319b-n3-55 .
+  
+  _:genid-7e1fa5a32e1b4784b38d687ca041319b-n3-59 a <http://arena2036.example.org/TransporterTask>;
+    <http://arena2036.example.org/instrument> <http://127.0.1.1:8080/transporters/fastTransporter1>;
+    <http://arena2036.example.org/toLocationX> 8;
+    <http://arena2036.example.org/toLocationY> 7;
+    <http://arena2036.example.org/output> _:genid-7e1fa5a32e1b4784b38d687ca041319b-n3-55 .
+  
+  _:genid-7e1fa5a32e1b4784b38d687ca041319b-n3-60 rdf:subject _:genid-7e1fa5a32e1b4784b38d687ca041319b-n3-55;
+    rdf:predicate rdf:type;
+    rdf:object <http://arena2036.example.org/Product> .
+  
+  _:genid-7e1fa5a32e1b4784b38d687ca041319b-n3-61 rdf:subject _:genid-7e1fa5a32e1b4784b38d687ca041319b-n3-55;
+    rdf:predicate <http://arena2036.example.org/kind>;
+    rdf:object <http://arena2036.example.org/ram> .
+  
+  _:genid-7e1fa5a32e1b4784b38d687ca041319b-n3-62 rdf:subject _:genid-7e1fa5a32e1b4784b38d687ca041319b-n3-55;
+    rdf:predicate <http://arena2036.example.org/locationX>;
+    rdf:object 8 .
+  
+  _:genid-7e1fa5a32e1b4784b38d687ca041319b-n3-63 rdf:subject _:genid-7e1fa5a32e1b4784b38d687ca041319b-n3-55;
+    rdf:predicate <http://arena2036.example.org/locationY>;
+    rdf:object 7 .
+  
+  _:genid-7e1fa5a32e1b4784b38d687ca041319b-n3-64 rdf:subject _:genid-7e1fa5a32e1b4784b38d687ca041319b-n3-55;
+    rdf:predicate rdf:type;
+    rdf:object <http://arena2036.example.org/Product> .
+  
+  _:genid-7e1fa5a32e1b4784b38d687ca041319b-n3-65 rdf:subject _:genid-7e1fa5a32e1b4784b38d687ca041319b-n3-55;
+    rdf:predicate <http://arena2036.example.org/kind>;
+    rdf:object <http://arena2036.example.org/ram> .
+  
+  _:genid-7e1fa5a32e1b4784b38d687ca041319b-n3-66 rdf:subject _:genid-7e1fa5a32e1b4784b38d687ca041319b-n3-55;
+    rdf:predicate <http://arena2036.example.org/locationX>;
+    rdf:object 2 .
+  
+  _:genid-7e1fa5a32e1b4784b38d687ca041319b-n3-67 rdf:subject _:genid-7e1fa5a32e1b4784b38d687ca041319b-n3-55;
+    rdf:predicate <http://arena2036.example.org/locationY>;
+    rdf:object 1 .
+}
+
+<http://127.0.1.1:8080/transporters/fastTransporter1/affordances/bced2714-b9be-4ba0-81a0-f634ddfebfea> {
+  <http://127.0.1.1:8080/transporters/fastTransporter1/affordances/bced2714-b9be-4ba0-81a0-f634ddfebfea>
+    a <http://arena2036.example.org/Affordance>;
+    <http://arena2036.example.org/needsTask> _:genid-dfe0230612fc4197977c7bb4af561521-n3-69;
+    <http://arena2036.example.org/hasPostcondition> _:genid-dfe0230612fc4197977c7bb4af561521-n3-73,
+      _:genid-dfe0230612fc4197977c7bb4af561521-n3-74, _:genid-dfe0230612fc4197977c7bb4af561521-n3-75,
+      _:genid-dfe0230612fc4197977c7bb4af561521-n3-76;
+    <http://arena2036.example.org/hasPrecondition> _:genid-dfe0230612fc4197977c7bb4af561521-n3-77,
+      _:genid-dfe0230612fc4197977c7bb4af561521-n3-78, _:genid-dfe0230612fc4197977c7bb4af561521-n3-79,
+      _:genid-dfe0230612fc4197977c7bb4af561521-n3-80 .
+  
+  _:genid-dfe0230612fc4197977c7bb4af561521-n3-69 rdf:first _:genid-dfe0230612fc4197977c7bb4af561521-n3-71;
+    rdf:rest _:genid-dfe0230612fc4197977c7bb4af561521-n3-70 .
+  
+  _:genid-dfe0230612fc4197977c7bb4af561521-n3-70 rdf:first _:genid-dfe0230612fc4197977c7bb4af561521-n3-72;
+    rdf:rest rdf:nil .
+  
+  _:genid-dfe0230612fc4197977c7bb4af561521-n3-71 a <http://arena2036.example.org/TransporterTask>;
+    <http://arena2036.example.org/instrument> <http://127.0.1.1:8080/transporters/fastTransporter1>;
+    <http://arena2036.example.org/toLocationX> 2;
+    <http://arena2036.example.org/toLocationY> 1;
+    <http://arena2036.example.org/input> _:genid-dfe0230612fc4197977c7bb4af561521-n3-68 .
+  
+  _:genid-dfe0230612fc4197977c7bb4af561521-n3-72 a <http://arena2036.example.org/TransporterTask>;
+    <http://arena2036.example.org/instrument> <http://127.0.1.1:8080/transporters/fastTransporter1>;
+    <http://arena2036.example.org/toLocationX> 8;
+    <http://arena2036.example.org/toLocationY> 7;
+    <http://arena2036.example.org/output> _:genid-dfe0230612fc4197977c7bb4af561521-n3-68 .
+  
+  _:genid-dfe0230612fc4197977c7bb4af561521-n3-73 rdf:subject _:genid-dfe0230612fc4197977c7bb4af561521-n3-68;
+    rdf:predicate rdf:type;
+    rdf:object <http://arena2036.example.org/Product> .
+  
+  _:genid-dfe0230612fc4197977c7bb4af561521-n3-74 rdf:subject _:genid-dfe0230612fc4197977c7bb4af561521-n3-68;
+    rdf:predicate <http://arena2036.example.org/kind>;
+    rdf:object <http://arena2036.example.org/flashMemory> .
+  
+  _:genid-dfe0230612fc4197977c7bb4af561521-n3-75 rdf:subject _:genid-dfe0230612fc4197977c7bb4af561521-n3-68;
+    rdf:predicate <http://arena2036.example.org/locationX>;
+    rdf:object 8 .
+  
+  _:genid-dfe0230612fc4197977c7bb4af561521-n3-76 rdf:subject _:genid-dfe0230612fc4197977c7bb4af561521-n3-68;
+    rdf:predicate <http://arena2036.example.org/locationY>;
+    rdf:object 7 .
+  
+  _:genid-dfe0230612fc4197977c7bb4af561521-n3-77 rdf:subject _:genid-dfe0230612fc4197977c7bb4af561521-n3-68;
+    rdf:predicate rdf:type;
+    rdf:object <http://arena2036.example.org/Product> .
+  
+  _:genid-dfe0230612fc4197977c7bb4af561521-n3-78 rdf:subject _:genid-dfe0230612fc4197977c7bb4af561521-n3-68;
+    rdf:predicate <http://arena2036.example.org/kind>;
+    rdf:object <http://arena2036.example.org/flashMemory> .
+  
+  _:genid-dfe0230612fc4197977c7bb4af561521-n3-79 rdf:subject _:genid-dfe0230612fc4197977c7bb4af561521-n3-68;
+    rdf:predicate <http://arena2036.example.org/locationX>;
+    rdf:object 2 .
+  
+  _:genid-dfe0230612fc4197977c7bb4af561521-n3-80 rdf:subject _:genid-dfe0230612fc4197977c7bb4af561521-n3-68;
+    rdf:predicate <http://arena2036.example.org/locationY>;
+    rdf:object 1 .
+}
