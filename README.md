@@ -8,7 +8,7 @@ The data is taken from a simulation of a minimized scenario (only the first prod
 
 Furthermore a video of the simulation where the data is taken from can be seen [here](https://www.youtube.com/watch?v=kL57WT1qKdk) and the simulation can be replayed [here](https://paul.ti.rw.fau.de/~pi69geby/2021/demoESWC/gui/).
 
-There also exists a [paper](https://doi.org/10.1109/SSCI50451.2021.9659946) that referrs to the Minimal Smartphone Scenario.
+There also exists a [paper](https://doi.org/10.1109/SSCI50451.2021.9659946) that refers to the Minimal Smartphone Scenario.
 
 ## The dump
 The original RDF data is located in the `rdf/` folder. Each `.trig` file represents the simulation state at a time step.
