@@ -17,5 +17,8 @@ The original RDF data is located in the `rdf/` folder. Each `.trig` file represe
 
 The actual results can be seen in `dump.csv` where the column `memoryStorageStation1Recipe` has been manually corrected due to an error in the simulation regarding the active recipes.
 
+## Run the Simulation
+The scenario is [here](https://github.com/wintechis/modular-smartphone-with-faults) and the BOLD simulation server is [here](https://github.com/wintechis/bold-server-ldp).
+
 ## Acknowledgements
 This work was funded by the German Federal Ministry of Education and Research through the MOSAIK project (grant no. 01IS18070A).
