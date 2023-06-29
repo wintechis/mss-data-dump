@@ -2,7 +2,7 @@
 
 ## About the scenario
 
-The whole scenario is described [here](Specification%20Modular%20Smartphone%20Production%20Scenario.pdf) and [here](Diagram%20Modular%20Smartphone%20Production%20Scenario.pdf).
+The whole scenario is described [here](Specification%20Modular%20Smartphone%20Production%20Scenario.pdf), [here](Diagram%20Modular%20Smartphone%20Production%20Scenario.pdf) and [here](Zusammenfassung.pdf) (German).
 
 The data is taken from a simulation of a minimized scenario (only the first production step and no product variants) that is further described [here](https://paul.ti.rw.fau.de/~pi69geby/2021/demoESWC/).
 
